@@ -41,6 +41,7 @@ public class ListController implements Initializable {
 
     private String typedText;
     private List<String> StringText;
+    private Item selectItem;
 
 
     private ObservableList<Item> itemList = FXCollections.observableArrayList();
@@ -94,9 +95,9 @@ public class ListController implements Initializable {
     }
 
 
-    public Item ProcessItem(Item item){
-        System.out.println(item);
-        return item;
+    public Item ProcessItem(){
+        System.out.println(selectItem);
+        return selectItem;
     }
 
     @Override
@@ -164,9 +165,9 @@ public class ListController implements Initializable {
         //Retornar o item selecionado, seja para venda ou para tela de ver preço.
         TableItens.setOnKeyPressed( event -> {
             if(event.getCode() == KeyCode.ENTER){
-                Item selectItem = TableItens.getSelectionModel().getSelectedItem();
+                selectItem = TableItens.getSelectionModel().getSelectedItem();
                 if(selectItem != null){
-                    ProcessItem(selectItem);
+                    TableItens.getScene().getWindow().hide();
                 }
             }
         });

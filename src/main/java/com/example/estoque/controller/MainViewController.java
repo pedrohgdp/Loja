@@ -17,7 +17,7 @@ public class MainViewController {
 
     @FXML
     public void setConsultPriceButton(){
-        openNewStage("Consultar preço", "ListItens");
+        openNewStage("Consultar preço", "ItemInfos");
     }
 
     private void openNewStage(String StageTitle, String fxmlName){
