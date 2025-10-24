@@ -8,6 +8,7 @@ public class Item {
     private String brand;
     private Integer shelf;
     private String shelfLevel;
+    private Integer amountSold;
 
     public Item(String code, String description, double price, Integer amount, String brand, Integer shelf, String shelfLevel) {
         this.code = code;
@@ -17,6 +18,15 @@ public class Item {
         this.brand = brand;
         this.shelf = shelf;
         this.shelfLevel = shelfLevel;
+        this.amountSold = 0;
+    }
+
+    public Integer getAmountSold() {
+        return amountSold;
+    }
+
+    public void setAmountSold(Integer amoutSold) {
+        this.amountSold = amoutSold;
     }
 
     public String getCode() {
@@ -73,6 +83,10 @@ public class Item {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public Double getTotal(){
+        return getPrice() * getAmountSold();
     }
 
     @Override

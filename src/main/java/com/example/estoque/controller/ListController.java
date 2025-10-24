@@ -52,7 +52,7 @@ public class ListController implements Initializable {
     private Item mangueiraSupFIre = new Item("21530.0", "mangueira sup Fire", 19.99, 20, "Tecfil", 107, "j10");
     private Item mangueiraInfFire = new Item("1234231.0", "mangueira inf Fire", 19.99, 20, "Tecfil", 110, "a6");
     private Item casquilhoFixoFire = new Item("12312", "casquilho fixo fire 0,25", 19.99, 20, "Tecfil", 99, "i1");
-    private Item a = new Item("psl55", "mangueira oleo celta", 19.99, 20, "Tecfil", 99, "i1");
+    private Item a = new Item("psl55", "mangueira oleo celta", 19.99, 19, "Tecfil", 99, "i1");
     private Item b = new Item("psl55", "mangueira inf celta", 19.99, 20, "Tecfil", 99, "i1");
     private Item c = new Item("psl55", "mangueira sup Celta", 19.99, 20, "Tecfil", 99, "i1");
     private Item d = new Item("psl55", "arranque Onix", 19.99, 20, "Tecfil", 99, "i1");

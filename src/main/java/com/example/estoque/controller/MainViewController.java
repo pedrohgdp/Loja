@@ -14,6 +14,10 @@ public class MainViewController {
 
 
 
+    @FXML
+    public void setDoSaleButton(){
+        openNewStage("Fazer Venda", "Sale");
+    }
 
     @FXML
     public void setConsultPriceButton(){
