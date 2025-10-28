@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoque.controller.AmountItemController">
+   <children>
+      <TextField fx:id="amountTextField" layoutX="108.0" layoutY="31.0" prefHeight="45.0" prefWidth="162.0" text="Digite a quantidade" />
+      <Button fx:id="confirmButton" layoutX="149.0" layoutY="125.0" mnemonicParsing="false" text="Confirmar" onAction="#setOnConfirmButton"/>
+   </children>
+</AnchorPane>

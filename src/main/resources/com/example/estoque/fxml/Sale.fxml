@@ -18,10 +18,12 @@
             <TableColumn fx:id="brand" prefWidth="114.0" text="Marca" />
         </columns>
       </TableView>
-      <Label fx:id="price" layoutX="867.0" layoutY="576.0" prefHeight="30.0" prefWidth="187.0" text="Valor:" />
-      <Label fx:id="discount" layoutX="867.0" layoutY="606.0" prefHeight="30.0" prefWidth="178.0" text="Desconto:" />
-      <Label fx:id="finalPrice" layoutX="867.0" layoutY="636.0" prefHeight="30.0" prefWidth="178.0" text="Valor Final:" />
+      <Label fx:id="priceLabel" layoutX="867.0" layoutY="576.0" prefHeight="30.0" prefWidth="187.0" text="Valor:" />
+      <Label fx:id="discountTextArea" layoutX="867.0" layoutY="606.0" prefHeight="30.0" prefWidth="178.0" text="Desconto:" />
+      <Label fx:id="finalPriceLabel" layoutX="867.0" layoutY="636.0" prefHeight="30.0" prefWidth="178.0" text="Valor Final:" />
       <Button fx:id="printNote" layoutX="867.0" layoutY="666.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="209.0" text="Imprimir" />
-      <Button fx:id="addItem" layoutX="24.0" layoutY="591.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" text="Adicionar Item" onAction="#setOnAddItemButton"/>
+      <Button fx:id="addItem" layoutX="24.0" layoutY="591.0" mnemonicParsing="false" onAction="#setOnAddItemButton" prefHeight="30.0" prefWidth="151.0" text="Adicionar Item" />
+      <Button fx:id="removeItem" layoutX="196.0" layoutY="591.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="151.0" text="Remover Item" onAction="#setOnRemoveItemButton"/>
+      <TextField fx:id="discountTextField" layoutX="934.0" layoutY="610.0" prefHeight="22.0" prefWidth="141.0" />
    </children>
 </AnchorPane>
