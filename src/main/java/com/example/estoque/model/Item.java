@@ -21,6 +21,8 @@ public class Item {
         this.amountSold = 0;
     }
 
+    public Item(){}
+
     public Integer getAmountSold() {
         return amountSold;
     }

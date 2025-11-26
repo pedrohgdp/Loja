@@ -1,5 +1,6 @@
 package com.example.estoque;
 
+import com.example.estoque.service.ItemsService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,8 +9,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainApplication extends Application {
+
+    private ItemsService itemsService = ItemsService.getInstance();
+
     @Override
     public void start(Stage stage) throws IOException {
+        itemsService.fillItemsFromDb();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/com/example/estoque/fxml/MainView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 700);
         stage.setTitle("Loja!");

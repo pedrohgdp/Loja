@@ -1,6 +1,7 @@
 package com.example.estoque.controller;
 
 import com.example.estoque.model.Item;
+import com.example.estoque.repository.ItemDatabaseLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -19,6 +20,8 @@ import java.util.*;
 
 public class ListController implements Initializable {
 
+    private static ListController listControllerInstance = null;
+
     @FXML
     private TableView<Item> TableItens;
     @FXML
@@ -34,10 +37,9 @@ public class ListController implements Initializable {
     @FXML
     private TableColumn<Item, Integer> Shelf;
     @FXML
-    private TableColumn<Item, Integer> ShelfLevel;
+    private TableColumn<Item, String> ShelfLevel;
     @FXML
     private TextField SearchBar;
-
 
     private String typedText;
     private List<String> StringText;
@@ -47,25 +49,6 @@ public class ListController implements Initializable {
     private ObservableList<Item> itemList = FXCollections.observableArrayList();
     private FilteredList<Item> filteredListItem;
 
-    private Item filtroOleoFire = new Item("psl55", "Filtro oleo Fire", 19.99, 20, "Tecfil", 212, "i22");
-    private Item filtroOleoCorsa = new Item("psl619", "Filtro oleo celta", 19.99, 20, "Tecfil", 213, "j12");
-    private Item mangueiraSupFIre = new Item("21530.0", "mangueira sup Fire", 19.99, 20, "Tecfil", 107, "j10");
-    private Item mangueiraInfFire = new Item("1234231.0", "mangueira inf Fire", 19.99, 20, "Tecfil", 110, "a6");
-    private Item casquilhoFixoFire = new Item("12312", "casquilho fixo fire 0,25", 19.99, 20, "Tecfil", 99, "i1");
-    private Item a = new Item("psl55", "mangueira oleo celta", 19.99, 19, "Tecfil", 99, "i1");
-    private Item b = new Item("psl55", "mangueira inf celta", 19.99, 20, "Tecfil", 99, "i1");
-    private Item c = new Item("psl55", "mangueira sup Celta", 19.99, 20, "Tecfil", 99, "i1");
-    private Item d = new Item("psl55", "arranque Onix", 19.99, 20, "Tecfil", 99, "i1");
-    private Item e = new Item("psl55", "casquilho biela Onix", 19.99, 20, "Tecfil", 99, "i1");
-    private Item f = new Item("psl55", "Filtro oleo Onix", 19.99, 20, "Tecfil", 99, "i1");
-    private Item g = new Item("psl55", "mang oleo cobalt", 19.99, 20, "Tecfil", 99, "i1");
-    private Item h = new Item("psl55", "mangueira oleo cobalt", 19.99, 20, "Tecfil", 99, "i1");
-    private Item i = new Item("psl55", "Filtro oleo cobalt", 19.99, 20, "Tecfil", 99, "i1");
-    private Item j = new Item("psl55", "casquilho fixo Cobalt 0,50", 19.99, 20, "Tecfil", 99, "i1");
-    private Item k = new Item("psl55", "arranque Fire", 19.99, 20, "Tecfil", 99, "i1");
-    private Item m = new Item("psl55", "Filtro oleo Uno", 19.99, 20, "Tecfil", 99, "i1");
-    private Item n = new Item("psl55", "peneira oleo Fusca", 19.99, 20, "Tecfil", 99, "i1");
-    private Item o = new Item("psl55", "junta peneira oleo Fusca", 19.99, 20, "Tecfil", 99, "i1");
 
     public void FillTable(SortedList<Item> itemList){
         ItemCode.setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -94,7 +77,6 @@ public class ListController implements Initializable {
         return listText;
     }
 
-
     public Item ProcessItem(){
         System.out.println(selectItem);
         return selectItem;
@@ -102,32 +84,13 @@ public class ListController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        TableItens.getSelectionModel().setCellSelectionEnabled(true); ///Libera a selecao de celula nao so linha
 
-        itemList.add(filtroOleoFire);
-        itemList.add(filtroOleoCorsa);
-        itemList.add(mangueiraSupFIre);
-        itemList.add(mangueiraInfFire);
-        itemList.add(casquilhoFixoFire);
-        itemList.add(a);
-        itemList.add(b);
-        itemList.add(c);
-        itemList.add(d);
-        itemList.add(e);
-        itemList.add(f);
-        itemList.add(g);
-        itemList.add(h);
-        itemList.add(i);
-        itemList.add(j);
-        itemList.add(k);
-        itemList.add(m);
-        itemList.add(n);
-        itemList.add(o);
+        TableItens.getSelectionModel().setCellSelectionEnabled(true); ///Libera a selecao de celula nao so linha
 
         //Botamos nossa ObservableList em uma FilteredList para filtrar
         //E depois ela em uma sorted List e linkamos o sort da list com sort que a table faz
         filteredListItem = new FilteredList<>(itemList);
-        SortedList<Item> sortedListItem = new SortedList(filteredListItem);
+        SortedList<Item> sortedListItem = new SortedList<>(filteredListItem);
         sortedListItem.comparatorProperty().bind(TableItens.comparatorProperty()); //Pega a propriedade do Table view e
         //Linka com o sortedList para o sortedList meio que ordenar com base em como a tableview ordena
 
@@ -173,4 +136,15 @@ public class ListController implements Initializable {
         });
     }
 
+    public static synchronized ListController getInstance(){
+        if(listControllerInstance == null){
+            listControllerInstance = new ListController();
+        }
+
+        return listControllerInstance;
+    }
+
+    public void setItemsOnListItems(List<Item> items){
+        itemList.setAll(items);
+    }
 }

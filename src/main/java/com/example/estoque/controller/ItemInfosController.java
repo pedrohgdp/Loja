@@ -1,6 +1,7 @@
 package com.example.estoque.controller;
 
 import com.example.estoque.model.Item;
+import com.example.estoque.service.ItemsService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,11 +35,13 @@ public class ItemInfosController implements Initializable {
     private Label shelfLevelLabel;
 
     public Item OpenList(){
+        ItemsService itemsService = ItemsService.getInstance();
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/estoque/fxml/ListItens.fxml"));
             Parent root = fxmlLoader.load();
             ListController listController = fxmlLoader.getController(); // Pego o controller que e o que vai guardar
             //A variavel do item corretamente
+            listController.setItemsOnListItems(itemsService.getItems());
             Stage stage = new Stage();
             stage.setTitle("Lista de Items");
             stage.setScene(new Scene(root));

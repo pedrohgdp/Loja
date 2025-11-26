@@ -15,10 +15,14 @@ public class MainViewController {
 
 
     @FXML
+    public void setAdicionarItemButtonClicked(){
+        openNewStage("Adicionar Item", "AddItem");
+    }
+
+    @FXML
     public void setDoSaleButton(){
         openNewStage("Fazer Venda", "Sale");
     }
-
     @FXML
     public void setConsultPriceButton(){
         openNewStage("Consultar preço", "ItemInfos");
