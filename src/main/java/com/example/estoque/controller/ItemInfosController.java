@@ -56,7 +56,8 @@ public class ItemInfosController implements Initializable {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/estoque/fxml/ListaItens.fxml"));
             Parent root = fxmlLoader.load();
-            ListaItemController listaItemController = fxmlLoader.getController(); // Pego o controller que e o que vai guardar
+            ListaItemController listaItemController = fxmlLoader.getController();
+            listaItemController.setListaItem(preencherLista.getItens());
             Stage stage = new Stage();
             stage.setTitle("Lista de Items");
             stage.setScene(new Scene(root));

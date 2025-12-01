@@ -2,7 +2,7 @@ package com.example.estoque.controller;
 
 import com.example.estoque.model.Item;
 import com.example.estoque.model.Nota;
-import com.example.estoque.service.SingletonPreencherLista; // Mantido, nome de classe externa
+import com.example.estoque.service.SingletonPreencherLista;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +29,6 @@ public class VendaController implements Initializable {
     // Variáveis de controle
     private Item itemRetornado;
     private ObservableList<Item> listaItens = FXCollections.observableArrayList();
-    private ListaItemController listaItemController;
     private QuantidadeItemController quantidadeItemController;
     private PrecoItemNaVendaController precoItemNaVendaController;
     private Integer quantidadeItem;
@@ -269,14 +268,11 @@ public class VendaController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
 
-            // Depois que a janela é fechada, obtemos a quantidade
             quantidadeItem = quantidadeItemController.retornarQuantidade();
 
-            // Se a quantidade for válida, chamamos a próxima etapa
             if(quantidadeItem != null && quantidadeItem > 0) {
-                carregarPrecoItem(); // Renomeado: loadPriceItem -> carregarPrecoItem
+                carregarPrecoItem();
             } else {
-                // Define itemRetornado como null se a quantidade não for válida (cancelamento, 0, etc.)
                 itemRetornado = null;
             }
 
@@ -305,21 +301,17 @@ public class VendaController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/estoque/fxml/ListaItens.fxml"));
             Parent raiz = fxmlLoader.load();
-            Stage estagio = new Stage();
-            estagio.setTitle("Lista de Itens");
-            estagio.setScene(new Scene(raiz));
-            estagio.initModality(Modality.APPLICATION_MODAL); // Adicionado para bloquear a tela principal
-            estagio.showAndWait();
+            SingletonPreencherLista singletonPreencherLista = SingletonPreencherLista.getInstance();
+            ListaItemController listaItemController = fxmlLoader.getController();
+            listaItemController.setListaItem(singletonPreencherLista.getItens());
+            Stage stage = new Stage();
+            stage.setTitle("Lista de Itens");
+            stage.setScene(new Scene(raiz));
+            stage.initModality(Modality.APPLICATION_MODAL); // Adicionado para bloquear a tela principal
+            stage.showAndWait();
 
             itemRetornado = listaItemController.processarItem();
-
-
-            if (itemRetornado != null) {
-
-            } else {
-                itemRetornado = null;
-            }
-
+            carregarQuantidadeItem();
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao carregar a tela de Lista de Itens", e);

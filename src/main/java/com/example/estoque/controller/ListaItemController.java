@@ -104,10 +104,10 @@ public class ListaItemController implements Initializable {
     }
 
     public void preencherTabela(SortedList<Item> listaItem){
-        codigoItem.setCellValueFactory(new PropertyValueFactory<>("codigoItem"));
-        descricaoItem.setCellValueFactory(new PropertyValueFactory<>("descricaoItem"));
-        precoItem.setCellValueFactory(new PropertyValueFactory<>("precoItem"));
-        quantidadeItem.setCellValueFactory(new PropertyValueFactory<>("quantidadeItem"));
+        codigoItem.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        descricaoItem.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        precoItem.setCellValueFactory(new PropertyValueFactory<>("preco"));
+        quantidadeItem.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         marca.setCellValueFactory(new PropertyValueFactory<>("marca"));
         estante.setCellValueFactory(new PropertyValueFactory<>("estante"));
         prateleira.setCellValueFactory(new PropertyValueFactory<>("prateleira"));
