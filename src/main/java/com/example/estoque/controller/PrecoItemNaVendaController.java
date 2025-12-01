@@ -16,6 +16,15 @@ public class PrecoItemNaVendaController implements Initializable {
     @FXML
     Button confirmarButton;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        precoTextField.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode() == KeyCode.ENTER){
+                pegarNumeroDoTextField();
+            }
+        });
+    }
+
     private double price = 1;
 
     public double retornarPreco(){
@@ -37,12 +46,4 @@ public class PrecoItemNaVendaController implements Initializable {
         pegarNumeroDoTextField();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        precoTextField.setOnKeyPressed(keyEvent -> {
-            if(keyEvent.getCode() == KeyCode.ENTER){
-                pegarNumeroDoTextField();
-            }
-        });
-    }
 }

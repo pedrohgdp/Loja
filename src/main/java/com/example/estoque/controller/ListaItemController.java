@@ -18,8 +18,6 @@ import java.util.*;
 
 public class ListaItemController implements Initializable {
 
-    private static ListaItemController listaItemControllerInstance = null;
-
     @FXML
     private TableView<Item> TableItens;
     @FXML
@@ -46,43 +44,6 @@ public class ListaItemController implements Initializable {
 
     private ObservableList<Item> listaItem = FXCollections.observableArrayList();
     private FilteredList<Item> listaItemFiltrada;
-
-
-    public void preencherTabela(SortedList<Item> listaItem){
-        codigoItem.setCellValueFactory(new PropertyValueFactory<>("codigoItem"));
-        descricaoItem.setCellValueFactory(new PropertyValueFactory<>("descricaoItem"));
-        precoItem.setCellValueFactory(new PropertyValueFactory<>("precoItem"));
-        quantidadeItem.setCellValueFactory(new PropertyValueFactory<>("quantidadeItem"));
-        marca.setCellValueFactory(new PropertyValueFactory<>("marca"));
-        estante.setCellValueFactory(new PropertyValueFactory<>("estante"));
-        prateleira.setCellValueFactory(new PropertyValueFactory<>("prateleira"));
-
-        TableItens.setItems(listaItem);
-    }
-
-    public List<String> preencherArrayDeBusca(String textoDigitado){
-        if(textoDigitado.equals(" ") || textoDigitado.isEmpty()) return new ArrayList<>();
-        List<String> listaTexto;
-        String textCleanWPorcent = textoDigitado.toLowerCase().trim();
-
-        if(textCleanWPorcent.contains("%")){
-            textCleanWPorcent = textCleanWPorcent.replace("%", "");
-        }
-
-        listaTexto = new ArrayList<>(Arrays.asList(textCleanWPorcent.split("\\s+")));
-        // \\s+ divide por espaco, tab, quebra de linha qualquer coisa
-
-        return listaTexto;
-    }
-
-    public Item processarItem(){
-        System.out.println(itemSelecionado);
-        return itemSelecionado;
-    }
-
-    public void setItemsOnListItems(List<Item> items){
-        listaItem.setAll(items);
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -138,11 +99,40 @@ public class ListaItemController implements Initializable {
         });
     }
 
-    public static synchronized ListaItemController getInstance(){
-        if(listaItemControllerInstance == null){
-            listaItemControllerInstance = new ListaItemController();
+    public void setListaItem(ArrayList<Item> listaItemDoDB) {
+        listaItem.setAll(listaItemDoDB);
+    }
+
+    public void preencherTabela(SortedList<Item> listaItem){
+        codigoItem.setCellValueFactory(new PropertyValueFactory<>("codigoItem"));
+        descricaoItem.setCellValueFactory(new PropertyValueFactory<>("descricaoItem"));
+        precoItem.setCellValueFactory(new PropertyValueFactory<>("precoItem"));
+        quantidadeItem.setCellValueFactory(new PropertyValueFactory<>("quantidadeItem"));
+        marca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        estante.setCellValueFactory(new PropertyValueFactory<>("estante"));
+        prateleira.setCellValueFactory(new PropertyValueFactory<>("prateleira"));
+
+        TableItens.setItems(listaItem);
+    }
+
+    public List<String> preencherArrayDeBusca(String textoDigitado){
+        if(textoDigitado.equals(" ") || textoDigitado.isEmpty()) return new ArrayList<>();
+        List<String> listaTexto;
+        String textCleanWPorcent = textoDigitado.toLowerCase().trim();
+
+        if(textCleanWPorcent.contains("%")){
+            textCleanWPorcent = textCleanWPorcent.replace("%", "");
         }
 
-        return listaItemControllerInstance;
+        listaTexto = new ArrayList<>(Arrays.asList(textCleanWPorcent.split("\\s+")));
+        // \\s+ divide por espaco, tab, quebra de linha qualquer coisa
+
+        return listaTexto;
     }
+
+    public Item processarItem(){
+        System.out.println(itemSelecionado);
+        return itemSelecionado;
+    }
+
 }

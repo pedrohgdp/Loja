@@ -1,7 +1,7 @@
 package com.example.estoque.controller;
 
 import com.example.estoque.model.Item;
-import com.example.estoque.service.SingletonItemPreencherLista;
+import com.example.estoque.service.SingletonPreencherLista;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,14 +33,30 @@ public class ItemInfosController implements Initializable {
     @FXML
     private Label prateleiraLabel;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        abrirLista.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode() == KeyCode.F3){
+                Item item = abrirListaFuncao();
+                setarLabels(item);
+                System.out.println("Item na classe de info: " + item.toString());
+            }
+        });
+    }
+
+    @FXML
+    public void setOnAbrirListaButton(){
+        Item item = abrirListaFuncao();
+        setarLabels(item);
+        System.out.println("Item na classe de info: " + item.toString());
+    }
+
     public Item abrirListaFuncao(){
-        SingletonItemPreencherLista preencherLista = SingletonItemPreencherLista.getInstance();
+        SingletonPreencherLista preencherLista = SingletonPreencherLista.getInstance();
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/estoque/fxml/ListaItens.fxml"));
             Parent root = fxmlLoader.load();
             ListaItemController listaItemController = fxmlLoader.getController(); // Pego o controller que e o que vai guardar
-            //A variavel do item corretamente
-            listaItemController.setItemsOnListItems(preencherLista.getItens());
             Stage stage = new Stage();
             stage.setTitle("Lista de Items");
             stage.setScene(new Scene(root));
@@ -59,23 +75,5 @@ public class ItemInfosController implements Initializable {
         marcaLabel.setText("Marca: " + item.getMarca());
         estanteLabel.setText("Estante: " + item.getEstante());
         prateleiraLabel.setText("Pratileira: " + item.getPrateleira());
-    }
-
-    @FXML
-    public void setOnAbrirListaButton(){
-        Item item = abrirListaFuncao();
-        setarLabels(item);
-        System.out.println("Item na classe de info: " + item.toString());
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        abrirLista.setOnKeyPressed(keyEvent -> {
-            if(keyEvent.getCode() == KeyCode.F3){
-                Item item = abrirListaFuncao();
-                setarLabels(item);
-                System.out.println("Item na classe de info: " + item.toString());
-            }
-        });
     }
 }

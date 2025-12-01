@@ -11,9 +11,6 @@ public class MainViewController {
 
 
 
-
-
-
     @FXML
     public void setAdicionarItemButtonClicked(){
         abrirNovoStage("Adicionar Item", "AdicionarItem");

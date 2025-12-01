@@ -16,6 +16,15 @@ public class QuantidadeItemController implements Initializable {
     @FXML
     Button confirmarButton;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        quantidadeTextField.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode() == KeyCode.ENTER){
+                pegarNumeroDoTextView();
+            }
+        });
+    }
+
     private Integer amount = 1;
 
     public int retornarQuantidade(){
@@ -37,12 +46,4 @@ public class QuantidadeItemController implements Initializable {
         pegarNumeroDoTextView();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        quantidadeTextField.setOnKeyPressed(keyEvent -> {
-            if(keyEvent.getCode() == KeyCode.ENTER){
-                pegarNumeroDoTextView();
-            }
-        });
-    }
 }

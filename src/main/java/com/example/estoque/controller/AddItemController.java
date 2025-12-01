@@ -2,6 +2,7 @@ package com.example.estoque.controller;
 
 import com.example.estoque.model.Item;
 import com.example.estoque.repository.AddNovoItem;
+import com.example.estoque.service.SingletonPreencherLista;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -34,7 +35,24 @@ public class AddItemController implements Initializable{
 
     private Item novoItem;
 
-    private AddNovoItem addNovoItemDB = new AddNovoItem();
+    private final AddNovoItem ADD_NOVO_ITEM = new AddNovoItem();
+    private final ListaItemController LISTA_ITEM_CONTROLLER = new ListaItemController();
+    private final SingletonPreencherLista SINGLETON_PREENCHER_LISTA = SingletonPreencherLista.getInstance();
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        novoItem = new Item();
+
+        confirmarButton.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode() == KeyCode.ENTER){
+                adicionarItemFuncao();
+                fecharStage();
+            }
+        });
+
+    }
 
     public boolean checarSeNaoFoiPostoValor() {
         return !codigo.getText().isEmpty()
@@ -71,7 +89,9 @@ public class AddItemController implements Initializable{
             return;
         }
 
-        addNovoItemDB.addNewItemOnDB(novoItem);
+        ADD_NOVO_ITEM.addNewItemOnDB(novoItem);
+        SINGLETON_PREENCHER_LISTA.preencherItensViaDB();
+        LISTA_ITEM_CONTROLLER.setListaItem(SINGLETON_PREENCHER_LISTA.getItens());
         System.out.println("adicionado com sucesso");
     }
 
@@ -85,17 +105,4 @@ public class AddItemController implements Initializable{
         fecharStage();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        novoItem = new Item();
-
-        confirmarButton.setOnKeyPressed(keyEvent -> {
-            if(keyEvent.getCode() == KeyCode.ENTER){
-                adicionarItemFuncao();
-                fecharStage();
-            }
-        });
-
-    }
 }
