@@ -36,8 +36,7 @@ public class AddItemController implements Initializable{
     private Item novoItem;
 
     private final AddNovoItem ADD_NOVO_ITEM = new AddNovoItem();
-    private final ListaItemController LISTA_ITEM_CONTROLLER = new ListaItemController();
-    private final SingletonPreencherLista SINGLETON_PREENCHER_LISTA = SingletonPreencherLista.getInstance();
+
 
 
     @Override
@@ -90,8 +89,6 @@ public class AddItemController implements Initializable{
         }
 
         ADD_NOVO_ITEM.addNewItemOnDB(novoItem);
-        SINGLETON_PREENCHER_LISTA.preencherItensViaDB();
-        LISTA_ITEM_CONTROLLER.setListaItem(SINGLETON_PREENCHER_LISTA.getItens());
         System.out.println("adicionado com sucesso");
     }
 

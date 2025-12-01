@@ -6,7 +6,7 @@
 <AnchorPane prefHeight="721.0" prefWidth="1081.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoque.controller.ListaItemController">
    <children>
       <TextField fx:id="barraPesquisa" layoutX="14.0" layoutY="14.0" prefHeight="24.0" prefWidth="317.0" text="Pesquise Aqui" />
-      <TableView fx:id="TableItens" layoutX="5.0" layoutY="55.0" prefHeight="662.0" prefWidth="1069.0">
+      <TableView fx:id="TabelaItens" layoutX="5.0" layoutY="55.0" prefHeight="662.0" prefWidth="1069.0">
         <columns>
             <TableColumn fx:id="codigoItem" prefWidth="105.0" text="Codigo" />
             <TableColumn fx:id="descricaoItem" prefWidth="492.0" text="Descricao" />

@@ -1,6 +1,7 @@
 package com.example.estoque.controller;
 
-import com.example.estoque.model.Item;
+
+import com.example.estoque.model.Cliente;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,51 +14,51 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class ListaItemController implements Initializable {
+public class ListaClienteController implements Initializable {
 
     @FXML
-    private TableView<Item> TabelaItens;
+    private TableView<Cliente> TabelaClientes;
     @FXML
-    private TableColumn<Item, String> codigoItem;
+    private TableColumn<Cliente, Integer> codigo;
     @FXML
-    private TableColumn<Item, String> descricaoItem;
+    private TableColumn<Cliente, String> nome;
     @FXML
-    private TableColumn<Item, Double> precoItem;
+    private TableColumn<Cliente, Double> limiteUsado;
     @FXML
-    private TableColumn<Item, Integer> quantidadeItem;
+    private TableColumn<Cliente, Double> limiteTotal;
     @FXML
-    private TableColumn<Item, String> marca;
-    @FXML
-    private TableColumn<Item, Integer> estante;
-    @FXML
-    private TableColumn<Item, String> prateleira;
+    private TableColumn<Cliente, String> cpfCnpj;
     @FXML
     private TextField barraPesquisa;
 
+
     private String textoDigitado;
     private List<String> listaTexto;
-    private Item itemSelecionado;
+    private Cliente clienteSelecionado;
 
-
-    private ObservableList<Item> listaItem = FXCollections.observableArrayList();
-    private FilteredList<Item> listaItemFiltrada;
+    private ObservableList<Cliente> listaCliente = FXCollections.observableArrayList();
+    private FilteredList<Cliente> listaClienteFiltrada;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        TabelaItens.getSelectionModel().setCellSelectionEnabled(true); //Libera a selecao de celula nao so linha
+        TabelaClientes.getSelectionModel().setCellSelectionEnabled(true); //Libera a selecao de celula nao so linha
 
         //Botamos nossa ObservableList em uma FilteredList para filtrar
         //E depois ela em uma sorted List e linkamos o sort da list com sort que a table faz
-        listaItemFiltrada = new FilteredList<>(listaItem);
-        SortedList<Item> sortedListItem = new SortedList<>(listaItemFiltrada);
-        sortedListItem.comparatorProperty().bind(TabelaItens.comparatorProperty()); //Pega a propriedade do Table view e
+        listaClienteFiltrada = new FilteredList<>(listaCliente);
+        SortedList<Cliente> listaClienteSorted = new SortedList<>(listaClienteFiltrada);
+        listaClienteSorted.comparatorProperty().bind(TabelaClientes.comparatorProperty()); //Pega a propriedade do Table view e
         //Linka com o sortedList para o sortedList meio que ordenar com base em como a tableview ordena
 
-        preencherTabela(sortedListItem);
+        preencherTabela(listaClienteSorted);
 
 
         barraPesquisa.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> barraPesquisa.clear());
@@ -70,15 +71,15 @@ public class ListaItemController implements Initializable {
                 System.out.println(textoDigitado);
                 listaTexto = preencherArrayDeBusca(textoDigitado);
 
-                listaItemFiltrada.setPredicate(item -> {
+                listaClienteFiltrada.setPredicate(cliente -> {
                     if(listaTexto.isEmpty()){
                         return true;
                     }
 
-                    String itemDescription = item.getDescricao().toLowerCase();
+                    String clienteNome = cliente.getNome().toLowerCase();
 
                     for(String key : listaTexto){
-                        if(!itemDescription.contains(key)){
+                        if(!clienteNome.contains(key)){
                             return false;
                         }
                     }
@@ -89,30 +90,25 @@ public class ListaItemController implements Initializable {
 
 
         //Retornar o item selecionado, seja para venda ou para tela de ver preço.
-        TabelaItens.setOnKeyPressed(event -> {
+        TabelaClientes.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER){
-                itemSelecionado = TabelaItens.getSelectionModel().getSelectedItem();
-                if(itemSelecionado != null){
-                    TabelaItens.getScene().getWindow().hide();
+                clienteSelecionado = TabelaClientes.getSelectionModel().getSelectedItem();
+                if(clienteSelecionado != null){
+                    TabelaClientes.getScene().getWindow().hide();
                 }
             }
         });
     }
 
-    public void setListaItem(ArrayList<Item> listaItemDoDB) {
-        listaItem.setAll(listaItemDoDB);
-    }
+    public void preencherTabela(SortedList<Cliente> listaCliente){
+        codigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        limiteUsado.setCellValueFactory(new PropertyValueFactory<>("limiteUsado"));
+        limiteTotal.setCellValueFactory(new PropertyValueFactory<>("limiteTotal"));
+        cpfCnpj.setCellValueFactory(new PropertyValueFactory<>("cpfCnpj"));
 
-    public void preencherTabela(SortedList<Item> listaItem){
-        codigoItem.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-        descricaoItem.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        precoItem.setCellValueFactory(new PropertyValueFactory<>("preco"));
-        quantidadeItem.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        marca.setCellValueFactory(new PropertyValueFactory<>("marca"));
-        estante.setCellValueFactory(new PropertyValueFactory<>("estante"));
-        prateleira.setCellValueFactory(new PropertyValueFactory<>("prateleira"));
 
-        TabelaItens.setItems(listaItem);
+        TabelaClientes.setItems(listaCliente);
     }
 
     public List<String> preencherArrayDeBusca(String textoDigitado){
@@ -130,9 +126,10 @@ public class ListaItemController implements Initializable {
         return listaTexto;
     }
 
-    public Item processarItem(){
-        System.out.println(itemSelecionado);
-        return itemSelecionado;
+    public Cliente processarCliente(){
+        System.out.println(clienteSelecionado);
+        return clienteSelecionado;
     }
+
 
 }

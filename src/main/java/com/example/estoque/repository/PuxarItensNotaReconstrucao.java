@@ -1,4 +1,4 @@
 package com.example.estoque.repository;
 
-public class PegarNotasClienteDB {
+public class PuxarItensNotaReconstrucao {
 }

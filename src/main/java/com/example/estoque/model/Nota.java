@@ -13,7 +13,7 @@ public class Nota {
     private final String precoBruto;
     private final String desconto;
     private final String precoFinal;
-    private String dataNota;
+    private final String dataNota;
 
     private LocalDate actualDate = LocalDate.now();
 
