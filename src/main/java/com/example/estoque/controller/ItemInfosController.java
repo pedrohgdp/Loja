@@ -1,7 +1,7 @@
 package com.example.estoque.controller;
 
 import com.example.estoque.model.Item;
-import com.example.estoque.service.ItemsService;
+import com.example.estoque.service.SingletonItemPreencherLista;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,69 +12,68 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
-import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ItemInfosController implements Initializable {
     @FXML
-    private Button openList;
+    private Button abrirLista;
     @FXML
-    private Label codeLabel;
+    private Label codigoLabel;
     @FXML
-    private Label descriptionLabel;
+    private Label descricaoLabel;
     @FXML
-    private Label priceLabel;
+    private Label precoLabel;
     @FXML
-    private Label amountLabel;
+    private Label quantidadeLabel;
     @FXML
-    private Label brandLabel;
+    private Label marcaLabel;
     @FXML
-    private Label shelfLabel;
+    private Label estanteLabel;
     @FXML
-    private Label shelfLevelLabel;
+    private Label prateleiraLabel;
 
-    public Item OpenList(){
-        ItemsService itemsService = ItemsService.getInstance();
+    public Item abrirListaFuncao(){
+        SingletonItemPreencherLista preencherLista = SingletonItemPreencherLista.getInstance();
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/estoque/fxml/ListItens.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/estoque/fxml/ListaItens.fxml"));
             Parent root = fxmlLoader.load();
-            ListController listController = fxmlLoader.getController(); // Pego o controller que e o que vai guardar
+            ListaItemController listaItemController = fxmlLoader.getController(); // Pego o controller que e o que vai guardar
             //A variavel do item corretamente
-            listController.setItemsOnListItems(itemsService.getItems());
+            listaItemController.setItemsOnListItems(preencherLista.getItens());
             Stage stage = new Stage();
             stage.setTitle("Lista de Items");
             stage.setScene(new Scene(root));
             stage.showAndWait();
-            return listController.ProcessItem(); //Retorno o item que o controller da stage guarda
+            return listaItemController.processarItem(); //Retorno o item que o controller da stage guarda
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void setLabels(Item item){
-        codeLabel.setText("Codigo: " + item.getCode());
-        descriptionLabel.setText("Descricao: " + item.getDescription());
-        priceLabel.setText("Preco Unitario: " + item.getPrice());
-        amountLabel.setText("Quantidade Estoque: " + item.getAmount());
-        brandLabel.setText("Marca: " + item.getBrand());
-        shelfLabel.setText("Estante: " + item.getShelf());
-        shelfLevelLabel.setText("Pratileira: " + item.getShelfLevel());
+    public void setarLabels(Item item){
+        codigoLabel.setText("Codigo: " + item.getCodigo());
+        descricaoLabel.setText("Descricao: " + item.getDescricao());
+        precoLabel.setText("Preco Unitario: " + item.getPreco());
+        quantidadeLabel.setText("Quantidade Estoque: " + item.getQuantidade());
+        marcaLabel.setText("Marca: " + item.getMarca());
+        estanteLabel.setText("Estante: " + item.getEstante());
+        prateleiraLabel.setText("Pratileira: " + item.getPrateleira());
     }
 
     @FXML
-    public void setOnOpenListButton(){
-        Item item = OpenList();
-        setLabels(item);
+    public void setOnAbrirListaButton(){
+        Item item = abrirListaFuncao();
+        setarLabels(item);
         System.out.println("Item na classe de info: " + item.toString());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        openList.setOnKeyPressed(keyEvent -> {
+        abrirLista.setOnKeyPressed(keyEvent -> {
             if(keyEvent.getCode() == KeyCode.F3){
-                Item item = OpenList();
-                setLabels(item);
+                Item item = abrirListaFuncao();
+                setarLabels(item);
                 System.out.println("Item na classe de info: " + item.toString());
             }
         });

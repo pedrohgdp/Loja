@@ -7,26 +7,25 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
-import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AmountItemController implements Initializable {
+public class PrecoItemNaVendaController implements Initializable {
     @FXML
-    TextField amountTextField;
+    TextField precoTextField;
     @FXML
-    Button confirmButton;
+    Button confirmarButton;
 
-    private Integer amount = 1;
+    private double price = 1;
 
-    public int returnAmount(){
-        return amount;
+    public double retornarPreco(){
+        return price;
     }
 
-    public void takeNumberFromTextField(){
-        if(amountTextField.getText().matches("\\d+")){
-            amount = Integer.parseInt(amountTextField.getText());
-            confirmButton.getScene().getWindow().hide();
+    public void pegarNumeroDoTextField(){
+        if(precoTextField.getText().matches("\\d+")){ //se ele e numero o \\d
+            price = Double.parseDouble(precoTextField.getText());
+            confirmarButton.getScene().getWindow().hide();
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Digite um número, texto não é aceitado.");
@@ -34,17 +33,15 @@ public class AmountItemController implements Initializable {
         }
     }
 
-
-    public void setOnConfirmButton(){
-        takeNumberFromTextField();
+    public void setOnConfirmarButton(){
+        pegarNumeroDoTextField();
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        amountTextField.setOnKeyPressed(keyEvent -> {
+        precoTextField.setOnKeyPressed(keyEvent -> {
             if(keyEvent.getCode() == KeyCode.ENTER){
-                takeNumberFromTextField();
+                pegarNumeroDoTextField();
             }
         });
     }

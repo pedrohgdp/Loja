@@ -10,22 +10,22 @@ import javafx.scene.input.KeyCode;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PriceItemSellController implements Initializable {
+public class QuantidadeItemController implements Initializable {
     @FXML
-    TextField priceTextField;
+    TextField quantidadeTextField;
     @FXML
-    Button confirmButton;
+    Button confirmarButton;
 
-    private double price = 1;
+    private Integer amount = 1;
 
-    public double returnPrice(){
-        return price;
+    public int retornarQuantidade(){
+        return amount;
     }
 
-    public void takeNumberFromTextField(){
-        if(priceTextField.getText().matches("\\d+")){ //se ele e numero o \\d
-            price = Double.parseDouble(priceTextField.getText());
-            confirmButton.getScene().getWindow().hide();
+    public void pegarNumeroDoTextView(){
+        if(quantidadeTextField.getText().matches("\\d+")){
+            amount = Integer.parseInt(quantidadeTextField.getText());
+            confirmarButton.getScene().getWindow().hide();
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Digite um número, texto não é aceitado.");
@@ -33,17 +33,15 @@ public class PriceItemSellController implements Initializable {
         }
     }
 
-
-    public void setOnConfirmButton(){
-        takeNumberFromTextField();
+    public void setOnConfirmarButton(){
+        pegarNumeroDoTextView();
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        priceTextField.setOnKeyPressed(keyEvent -> {
+        quantidadeTextField.setOnKeyPressed(keyEvent -> {
             if(keyEvent.getCode() == KeyCode.ENTER){
-                takeNumberFromTextField();
+                pegarNumeroDoTextView();
             }
         });
     }

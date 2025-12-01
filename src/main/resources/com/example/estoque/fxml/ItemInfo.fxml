@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="401.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoque.controller.ItemInfosController">
+   <children>
+      <Button fx:id="abrirLista" layoutX="260.0" layoutY="351.0" mnemonicParsing="false" text="Abrir Lista" onAction="#setOnAbrirListaButton"/>
+      <Label fx:id="codigoLabel" layoutX="88.0" layoutY="30.0" prefHeight="36.0" prefWidth="358.0" text="Codigo: " />
+      <Label fx:id="descricaoLabel" layoutX="86.0" layoutY="75.0" prefHeight="36.0" prefWidth="484.0" text="Descricao:" />
+      <Label fx:id="precoLabel" layoutX="87.0" layoutY="111.0" prefHeight="36.0" prefWidth="297.0" text="Preco:" />
+      <Label fx:id="quantidadeLabel" layoutX="86.0" layoutY="154.0" prefHeight="36.0" prefWidth="358.0" text="Quantidade:" />
+      <Label fx:id="marcaLabel" layoutX="86.0" layoutY="200.0" prefHeight="36.0" prefWidth="369.0" text="Marca:" />
+      <Label fx:id="estanteLabel" layoutX="86.0" layoutY="244.0" prefHeight="36.0" prefWidth="369.0" text="Estante:" />
+      <Label fx:id="prateleiraLabel" layoutX="88.0" layoutY="287.0" prefHeight="36.0" prefWidth="493.0" text="Prateleira:" />
+   </children>
+</AnchorPane>

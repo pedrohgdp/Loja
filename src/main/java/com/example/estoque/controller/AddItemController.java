@@ -1,14 +1,13 @@
 package com.example.estoque.controller;
 
 import com.example.estoque.model.Item;
-import com.example.estoque.repository.AddNewItem;
+import com.example.estoque.repository.AddNovoItem;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -17,46 +16,46 @@ import java.util.ResourceBundle;
 public class AddItemController implements Initializable{
 
     @FXML
-    private TextField code;
+    private TextField codigo;
     @FXML
-    private TextField description;
+    private TextField descricao;
     @FXML
-    private TextField price;
+    private TextField preco;
     @FXML
-    private TextField amount;
+    private TextField quantidade;
     @FXML
-    private TextField brand;
+    private TextField marca;
     @FXML
-    private TextField shelf;
+    private TextField estante;
     @FXML
-    private TextField shelfLevel;
+    private TextField prateleira;
     @FXML
-    private Button confirmButton;
+    private Button confirmarButton;
 
-    private Item newItem;
+    private Item novoItem;
 
-    private AddNewItem addNewItemDB = new AddNewItem();
+    private AddNovoItem addNovoItemDB = new AddNovoItem();
 
-    public boolean checkIfDontPutValue() {
-        return !code.getText().isEmpty()
-                && !description.getText().isEmpty()
-                && !price.getText().isEmpty()
-                && !amount.getText().isEmpty()
-                && !brand.getText().isEmpty()
-                && !shelf.getText().isEmpty()
-                && !shelfLevel.getText().isEmpty();
+    public boolean checarSeNaoFoiPostoValor() {
+        return !codigo.getText().isEmpty()
+                && !descricao.getText().isEmpty()
+                && !preco.getText().isEmpty()
+                && !quantidade.getText().isEmpty()
+                && !marca.getText().isEmpty()
+                && !estante.getText().isEmpty()
+                && !prateleira.getText().isEmpty();
     }
 
-    public void addItemFunction(){
-        if(checkIfDontPutValue()){
+    public void adicionarItemFuncao(){
+        if(checarSeNaoFoiPostoValor()){
             try{
-               newItem.setCode(code.getText());
-               newItem.setDescription(description.getText());
-               newItem.setPrice(Double.parseDouble(price.getText()));
-               newItem.setAmount(Integer.parseInt(amount.getText()));
-               newItem.setBrand(brand.getText());
-               newItem.setShelf(Integer.parseInt(shelf.getText()));
-               newItem.setShelfLevel(shelfLevel.getText());
+               novoItem.setCodigo(codigo.getText());
+               novoItem.setDescricao(descricao.getText());
+               novoItem.setPreco(Double.parseDouble(preco.getText()));
+               novoItem.setQuantidade(Integer.parseInt(quantidade.getText()));
+               novoItem.setMarca(marca.getText());
+               novoItem.setEstante(Integer.parseInt(estante.getText()));
+               novoItem.setPrateleira(prateleira.getText());
             } catch (IllegalArgumentException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Valor inválido");
@@ -72,28 +71,29 @@ public class AddItemController implements Initializable{
             return;
         }
 
-        addNewItemDB.addNewItemOnDB(newItem);
+        addNovoItemDB.addNewItemOnDB(novoItem);
         System.out.println("adicionado com sucesso");
     }
 
-    public void closeStage(){
-        Stage stage = (Stage) confirmButton.getScene().getWindow();
+    public void fecharStage(){
+        Stage stage = (Stage) confirmarButton.getScene().getWindow();
         stage.close();
     }
-    public void setOnConfirmButton(){
-        addItemFunction();
-        closeStage();
+
+    public void setOnConfirmarButton(){
+        adicionarItemFuncao();
+        fecharStage();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        newItem = new Item();
+        novoItem = new Item();
 
-        confirmButton.setOnKeyPressed(keyEvent -> {
+        confirmarButton.setOnKeyPressed(keyEvent -> {
             if(keyEvent.getCode() == KeyCode.ENTER){
-                addItemFunction();
-                closeStage();
+                adicionarItemFuncao();
+                fecharStage();
             }
         });
 

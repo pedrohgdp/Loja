@@ -3,12 +3,12 @@ package com.example.estoque.model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Date {
-    private LocalDate today = LocalDate.now();
+public class Data {
+    private LocalDate hoje = LocalDate.now();
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    private String formattedDate = today.format(FORMATTER);
+    private String dataFormatada = hoje.format(FORMATTER);
 
-    public String getFormattedDate() {
-        return formattedDate;
+    public String getDataFormatada() {
+        return dataFormatada;
     }
 }

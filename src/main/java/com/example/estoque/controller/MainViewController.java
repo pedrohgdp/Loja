@@ -16,19 +16,18 @@ public class MainViewController {
 
     @FXML
     public void setAdicionarItemButtonClicked(){
-        openNewStage("Adicionar Item", "AddItem");
-    }
-
-    @FXML
-    public void setDoSaleButton(){
-        openNewStage("Fazer Venda", "Sale");
+        abrirNovoStage("Adicionar Item", "AdicionarItem");
     }
     @FXML
-    public void setConsultPriceButton(){
-        openNewStage("Consultar preço", "ItemInfos");
+    public void setFazerVendaOnClick(){
+        abrirNovoStage("Fazer Venda", "Venda");
+    }
+    @FXML
+    public void setConsultarPrecoButton(){
+        abrirNovoStage("Consultar preço", "ItemInfo");
     }
 
-    private void openNewStage(String StageTitle, String fxmlName){
+    private void abrirNovoStage(String StageTitle, String fxmlName){
         String fxmlLocale = "/com/example/estoque/fxml/" + fxmlName + ".fxml";
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocale));

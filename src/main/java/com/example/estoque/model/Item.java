@@ -1,106 +1,106 @@
 package com.example.estoque.model;
 
 public class Item {
-    private String code;
-    private String description;
-    private Double price;
-    private Integer amount;
-    private String brand;
-    private Integer shelf;
-    private String shelfLevel;
-    private Integer amountSold;
+    private String codigo;
+    private String descricao;
+    private Double preco;
+    private Integer quantidade;
+    private String marca;
+    private Integer estante;
+    private String prateleira;
+    private Integer quantidadeVenda;
 
-    public Item(String code, String description, double price, Integer amount, String brand, Integer shelf, String shelfLevel) {
-        this.code = code;
-        this.description = description;
-        this.price = price;
-        this.amount = amount;
-        this.brand = brand;
-        this.shelf = shelf;
-        this.shelfLevel = shelfLevel;
-        this.amountSold = 0;
+    public Item(String codigo, String descricao, double preco, Integer quantidade, String marca, Integer estante, String prateleira) {
+        this.codigo = codigo;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.marca = marca;
+        this.estante = estante;
+        this.prateleira = prateleira;
+        this.quantidadeVenda = 0;
     }
 
     public Item(){}
 
-    public Integer getAmountSold() {
-        return amountSold;
+    public Integer getQuantidadeVenda() {
+        return quantidadeVenda;
     }
 
-    public void setAmountSold(Integer amoutSold) {
-        this.amountSold = amoutSold;
+    public void setQuantidadeVenda(Integer amoutSold) {
+        this.quantidadeVenda = amoutSold;
     }
 
-    public String getCode() {
-        return code;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public Integer getShelf() {
-        return shelf;
+    public Integer getEstante() {
+        return estante;
     }
 
-    public void setShelf(Integer shelf) {
-        this.shelf = shelf;
+    public void setEstante(Integer estante) {
+        this.estante = estante;
     }
 
-    public String getShelfLevel() {
-        return shelfLevel;
+    public String getPrateleira() {
+        return prateleira;
     }
 
-    public void setShelfLevel(String shelfLevel) {
-        this.shelfLevel = shelfLevel;
+    public void setPrateleira(String prateleira) {
+        this.prateleira = prateleira;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
     public Double getTotal(){
-        return getPrice() * getAmountSold();
+        return getPreco() * getQuantidadeVenda();
     }
 
     @Override
     public String toString() {
         return "Item{" +
-                "code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", amount=" + amount +
-                ", brand='" + brand + '\'' +
-                ", shelf=" + shelf +
-                ", shelfLevel='" + shelfLevel + '\'' +
+                "code='" + codigo + '\'' +
+                ", description='" + descricao + '\'' +
+                ", price=" + preco +
+                ", amount=" + quantidade +
+                ", brand='" + marca + '\'' +
+                ", shelf=" + estante +
+                ", shelfLevel='" + prateleira + '\'' +
                 '}';
     }
 }

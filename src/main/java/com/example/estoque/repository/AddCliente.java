@@ -1,4 +1,4 @@
 package com.example.estoque.repository;
 
-public class CreateNewNote {
+public class AddCliente {
 }

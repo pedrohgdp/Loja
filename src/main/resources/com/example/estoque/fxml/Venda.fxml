@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="701.0" prefWidth="1081.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoque.controller.VendaController">
+   <children>
+      <Label fx:id="numeroNota" layoutX="30.0" layoutY="23.0" prefHeight="37.0" prefWidth="187.0" text="Numero Nota:" />
+      <Label fx:id="cliente" layoutX="30.0" layoutY="71.0" prefHeight="53.0" prefWidth="373.0" text="Cliente:" />
+      <CheckBox fx:id="pegarCliente" layoutX="30.0" layoutY="137.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="187.0" text="Adicionar Cliente" />
+      <TableView fx:id="itens" layoutX="24.0" layoutY="192.0" prefHeight="384.0" prefWidth="1035.0">
+        <columns>
+          <TableColumn fx:id="codigo" prefWidth="125.0" text="Codigo" />
+          <TableColumn fx:id="descricao" prefWidth="508.0" text="Descricao" />
+            <TableColumn fx:id="precoUnitario" prefWidth="106.0" text="Preco Unitario" />
+            <TableColumn fx:id="quantidade" prefWidth="87.0" text="Quantidade " />
+            <TableColumn fx:id="precoTotal" minWidth="0.0" prefWidth="92.0" text="Preco Total" />
+            <TableColumn fx:id="marca" prefWidth="114.0" text="Marca" />
+        </columns>
+      </TableView>
+      <Label fx:id="precoLabel" layoutX="844.0" layoutY="576.0" prefHeight="30.0" prefWidth="88.0" text="Valor:" />
+      <Label fx:id="descontoTextArea" layoutX="843.0" layoutY="606.0" prefHeight="30.0" prefWidth="202.0" text="Desconto:" />
+      <Label fx:id="precoFinalLabel" layoutX="843.0" layoutY="636.0" prefHeight="30.0" prefWidth="100.0" text="Valor Final:" />
+      <Button fx:id="imprimirNota" onAction="#setOnImprimirNota" layoutX="866.0" layoutY="666.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="210.0" text="Imprimir" />
+      <Button fx:id="adicionarItem" layoutX="24.0" layoutY="591.0" mnemonicParsing="false" onAction="#setOnAdicionarItemButton" prefHeight="30.0" prefWidth="151.0" text="Adicionar Item" />
+      <Button fx:id="removerItem" layoutX="196.0" layoutY="591.0" mnemonicParsing="false" onAction="#setOnRemoverItemButton" prefHeight="30.0" prefWidth="151.0" text="Remover Item" />
+      <Label fx:id="solicitante" layoutX="426.0" layoutY="71.0" prefHeight="53.0" prefWidth="645.0" text="Solicitante:" />
+      <TextField id="DiscountTextField" fx:id="descontoTextField" layoutX="932.0" layoutY="608.0" />
+      <TextField id="FinalPriceTextField" fx:id="precoFinalTextField" layoutX="932.0" layoutY="638.0" />
+      <Label fx:id="preco" layoutX="932.0" layoutY="576.0" prefHeight="30.0" prefWidth="162.0" />
+   </children>
+</AnchorPane>

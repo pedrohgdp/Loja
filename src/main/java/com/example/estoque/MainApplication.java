@@ -1,6 +1,6 @@
 package com.example.estoque;
 
-import com.example.estoque.service.ItemsService;
+import com.example.estoque.service.SingletonItemPreencherLista;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,11 +10,11 @@ import java.io.IOException;
 
 public class MainApplication extends Application {
 
-    private ItemsService itemsService = ItemsService.getInstance();
+    private SingletonItemPreencherLista preencherListaInstance = SingletonItemPreencherLista.getInstance();
 
     @Override
     public void start(Stage stage) throws IOException {
-        itemsService.fillItemsFromDb();
+        preencherListaInstance.preencherItensViaDB();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/com/example/estoque/fxml/MainView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 700);
         stage.setTitle("Loja!");
