@@ -25,15 +25,16 @@ public class PrecoItemNaVendaController implements Initializable {
         });
     }
 
-    private double price = 1;
+    private double preco = 1;
 
     public double retornarPreco(){
-        return price;
+        return preco;
     }
 
     public void pegarNumeroDoTextField(){
-        if(precoTextField.getText().matches("\\d+")){ //se ele e numero o \\d
-            price = Double.parseDouble(precoTextField.getText());
+        String precoTexto = precoTextField.getText();
+        if(precoTexto.matches("\\d+(,\\d+)?")){
+            preco = Double.parseDouble(precoTexto.replace(",", "."));
             confirmarButton.getScene().getWindow().hide();
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -68,7 +68,7 @@ public class AddItemController implements Initializable{
             try{
                novoItem.setCodigo(codigo.getText());
                novoItem.setDescricao(descricao.getText());
-               novoItem.setPreco(Double.parseDouble(preco.getText()));
+               novoItem.setPreco(Double.parseDouble(preco.getText().replace(",", ".")));
                novoItem.setQuantidade(Integer.parseInt(quantidade.getText()));
                novoItem.setMarca(marca.getText());
                novoItem.setEstante(Integer.parseInt(estante.getText()));
@@ -88,7 +88,9 @@ public class AddItemController implements Initializable{
             return;
         }
 
+        SingletonPreencherLista preencherLista = SingletonPreencherLista.getInstance();
         ADD_NOVO_ITEM.addNewItemOnDB(novoItem);
+        preencherLista.preencherItensViaDB();
         System.out.println("adicionado com sucesso");
     }
 

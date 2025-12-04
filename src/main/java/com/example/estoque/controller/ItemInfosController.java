@@ -52,12 +52,10 @@ public class ItemInfosController implements Initializable {
     }
 
     public Item abrirListaFuncao(){
-        SingletonPreencherLista preencherLista = SingletonPreencherLista.getInstance();
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/estoque/fxml/ListaItens.fxml"));
             Parent root = fxmlLoader.load();
             ListaItemController listaItemController = fxmlLoader.getController();
-            listaItemController.setListaItem(preencherLista.getItens());
             Stage stage = new Stage();
             stage.setTitle("Lista de Items");
             stage.setScene(new Scene(root));

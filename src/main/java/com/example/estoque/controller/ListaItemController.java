@@ -1,6 +1,8 @@
 package com.example.estoque.controller;
 
 import com.example.estoque.model.Item;
+import com.example.estoque.repository.AddNovoItem;
+import com.example.estoque.service.SingletonPreencherLista;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -44,10 +46,14 @@ public class ListaItemController implements Initializable {
 
     private ObservableList<Item> listaItem = FXCollections.observableArrayList();
     private FilteredList<Item> listaItemFiltrada;
+    private final AddNovoItem ADD_ITEM = new AddNovoItem();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        SingletonPreencherLista singletonPreencherLista = SingletonPreencherLista.getInstance();
+        listaItem.addAll(singletonPreencherLista.getItens());
+        
         TabelaItens.getSelectionModel().setCellSelectionEnabled(true); //Libera a selecao de celula nao so linha
 
         //Botamos nossa ObservableList em uma FilteredList para filtrar

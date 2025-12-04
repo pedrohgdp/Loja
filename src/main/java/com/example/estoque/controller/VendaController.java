@@ -105,6 +105,7 @@ public class VendaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         atualizarPreco();
 
         descontoTextField.textProperty().addListener((obs, textoAntigo, textoNovo) -> { // Traduzido: oldText, newText -> textoAntigo, textoNovo
@@ -209,8 +210,6 @@ public class VendaController implements Initializable {
             itens.getItems().remove(item);
         }else{
             carregarQuantidadeItem();
-
-
             if(quantidadeItem != null && quantidadeItem > 0 && quantidadeItem < item.getQuantidadeVenda()){
                 item.setQuantidadeVenda(item.getQuantidadeVenda() - quantidadeItem);
             } else if (quantidadeItem != null && quantidadeItem >= item.getQuantidadeVenda()) {
@@ -270,9 +269,7 @@ public class VendaController implements Initializable {
 
             quantidadeItem = quantidadeItemController.retornarQuantidade();
 
-            if(quantidadeItem != null && quantidadeItem > 0) {
-                carregarPrecoItem();
-            } else {
+            if(!(quantidadeItem != null && quantidadeItem > 0)) {
                 itemRetornado = null;
             }
 
@@ -300,18 +297,20 @@ public class VendaController implements Initializable {
     public void carregarListaStage(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/estoque/fxml/ListaItens.fxml"));
-            Parent raiz = fxmlLoader.load();
-            SingletonPreencherLista singletonPreencherLista = SingletonPreencherLista.getInstance();
+            Parent raiz = fxmlLoader.load();;
             ListaItemController listaItemController = fxmlLoader.getController();
-            listaItemController.setListaItem(singletonPreencherLista.getItens());
             Stage stage = new Stage();
             stage.setTitle("Lista de Itens");
             stage.setScene(new Scene(raiz));
             stage.initModality(Modality.APPLICATION_MODAL); // Adicionado para bloquear a tela principal
             stage.showAndWait();
 
+
             itemRetornado = listaItemController.processarItem();
-            carregarQuantidadeItem();
+            if(itemRetornado != null){
+                carregarQuantidadeItem();
+                carregarPrecoItem();
+            }
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao carregar a tela de Lista de Itens", e);
@@ -329,27 +328,19 @@ public class VendaController implements Initializable {
         itens.setItems(listaDeItens);
     }
 
-    public void atualizarPreco(){ // Renomeado: updatePrice -> atualizarPreco
-        Double precoBruto = 0.0; // Renomeado: price -> precoBruto
+    public void atualizarPreco(){
+        Double precoBruto = 0.0;
 
-        for(Item item : listaItens){ // Renomeado: items -> item
+        for(Item item : listaItens){
             precoBruto += item.getTotal();
         }
 
-        String precoString = String.format("%.2f", precoBruto); // Formatado para 2 casas decimais
-        preco.setText(precoString.replace(',', '.')); // Garante que o separador decimal seja o ponto
+        String precoString = String.format("%.2f", precoBruto);
+        preco.setText(precoString.replace(',', '.'));
 
-        // Se o valor do campo de desconto estiver preenchido, recalcula o preço final
+
         if (!descontoTextField.getText().trim().isEmpty()) {
-            // Chama o listener do desconto para atualizar o preço final
-            // (Simula uma mudança no texto do desconto para recalcular o final)
-            // Se for preciso, chame a lógica de cálculo diretamente aqui.
-            // Para simplificar, vou manter a lógica de listener, mas isso pode ser perigoso
-            // devido ao controladorDesconto.
-            // Uma função de cálculo dedicada seria melhor.
-
-            // Lógica de recálculo simplificada:
-            if (!controladorDesconto) { // Evita loop infinito
+            if (!controladorDesconto) {
                 try {
                     double desconto = Double.parseDouble(descontoTextField.getText().replace(',', '.'));
                     double precoFinal = precoBruto * (1 - desconto / 100);
@@ -357,11 +348,9 @@ public class VendaController implements Initializable {
                     precoFinalTextField.setText(String.format("%.2f", precoFinal).replace(',', '.'));
                     controladorDesconto = false;
                 } catch (NumberFormatException e) {
-                    // Ignora, significa que o desconto não está em formato numérico
                 }
             }
         } else {
-            // Se não há desconto, o preço final é o preço bruto
             controladorDesconto = true;
             precoFinalTextField.setText(precoString.replace(',', '.'));
             controladorDesconto = false;
