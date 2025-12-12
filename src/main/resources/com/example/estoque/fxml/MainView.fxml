@@ -5,8 +5,8 @@
 
 <AnchorPane prefHeight="701.0" prefWidth="1081.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoque.controller.MainViewController">
    <children>
-      <Button fx:id="adicionarItem" onAction="#setAdicionarItemButtonClicked" layoutX="759.0" layoutY="125.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="292.0" text="Adicionar Item" />
-      <Button layoutX="759.0" layoutY="250.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="292.0" text="Button" />
+      <Button layoutX="759.0" layoutY="125.0" mnemonicParsing="false" onAction="#setAdicionarItemButtonClicked" prefHeight="81.0" prefWidth="292.0" text="Adicionar Item" />
+      <Button onAction="#setAdicionarClienteClicked" layoutX="759.0" layoutY="250.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="292.0" text="Adicionar Cliente" />
       <Button id="ConsultPriceButton" layoutX="81.0" layoutY="125.0" mnemonicParsing="false" onAction="#setConsultarPrecoButton" prefHeight="81.0" prefWidth="292.0" text="Consultar Preço" />
       <Button id="FazerVenda" layoutX="81.0" layoutY="250.0" mnemonicParsing="false" onAction="#setFazerVendaOnClick" prefHeight="81.0" prefWidth="292.0" text="Fazer Venda" />
       <Button layoutX="81.0" layoutY="381.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="292.0" text="Button" />

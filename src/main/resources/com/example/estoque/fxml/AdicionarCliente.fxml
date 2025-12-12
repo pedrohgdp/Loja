@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="432.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoque.controller.AddClienteController">
+<AnchorPane prefHeight="432.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.estoque.controller.ControleAdicao.AddClienteController">
    <children>
       <TextField fx:id="nome" layoutX="115.0" layoutY="14.0" prefHeight="45.0" prefWidth="441.0" />
       <TextField fx:id="limite" layoutX="115.0" layoutY="126.0" prefHeight="45.0" prefWidth="441.0" />

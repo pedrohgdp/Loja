@@ -10,7 +10,10 @@ import java.io.IOException;
 public class MainViewController {
 
 
-
+    @FXML
+    public void setAdicionarClienteClicked(){
+        abrirNovoStage("Adicionar Cliente", "AdicionarCliente");
+    }
     @FXML
     public void setAdicionarItemButtonClicked(){
         abrirNovoStage("Adicionar Item", "AdicionarItem");

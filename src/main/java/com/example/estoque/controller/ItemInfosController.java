@@ -1,7 +1,7 @@
 package com.example.estoque.controller;
 
+import com.example.estoque.controller.ListasControllers.ListaItemController;
 import com.example.estoque.model.Item;
-import com.example.estoque.service.SingletonPreencherLista;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
