@@ -3,14 +3,14 @@ package com.example.estoque.model;
 public class Item {
     private String codigo;
     private String descricao;
-    private Double preco;
-    private Integer quantidade;
+    private double preco;
+    private int quantidade;
     private String marca;
-    private Integer estante;
+    private int estante;
     private String prateleira;
-    private Integer quantidadeVenda;
+    private int quantidadeVenda;
 
-    public Item(String codigo, String descricao, double preco, Integer quantidade, String marca, Integer estante, String prateleira) {
+    public Item(String codigo, String descricao, double preco, int quantidade, String marca, int estante, String prateleira) {
         this.codigo = codigo;
         this.descricao = descricao;
         this.preco = preco;
@@ -22,14 +22,6 @@ public class Item {
     }
 
     public Item(){}
-
-    public Integer getQuantidadeVenda() {
-        return quantidadeVenda;
-    }
-
-    public void setQuantidadeVenda(Integer amoutSold) {
-        this.quantidadeVenda = amoutSold;
-    }
 
     public String getCodigo() {
         return codigo;
@@ -47,27 +39,35 @@ public class Item {
         this.descricao = descricao;
     }
 
-    public Double getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 
-    public Integer getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Integer quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
-    public Integer getEstante() {
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public int getEstante() {
         return estante;
     }
 
-    public void setEstante(Integer estante) {
+    public void setEstante(int estante) {
         this.estante = estante;
     }
 
@@ -79,15 +79,15 @@ public class Item {
         this.prateleira = prateleira;
     }
 
-    public String getMarca() {
-        return marca;
+    public int getQuantidadeVenda() {
+        return quantidadeVenda;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setQuantidadeVenda(int quantidadeVenda) {
+        this.quantidadeVenda = quantidadeVenda;
     }
 
-    public Double getTotal(){
+    public double getTotal(){
         return getPreco() * getQuantidadeVenda();
     }
 
