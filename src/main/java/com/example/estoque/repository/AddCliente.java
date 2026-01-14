@@ -7,7 +7,7 @@ import java.sql.*;
 public class AddCliente {
     private final String URL = "jdbc:sqlite:src/main/resources/com/example/estoque/DB/DB.db";
 
-    public void addCliente(Cliente cliente) {
+    public boolean addCliente(Cliente cliente) {
         String checarCliente = "SELECT codigo FROM cliente WHERE cpf_cnpj = ?";
         String inserirCliente = """
                     INSERT INTO cliente (nome, limite_usado, limite_total, cpf_cnpj)
@@ -22,7 +22,7 @@ public class AddCliente {
 
             if (rs.next()) {
                 System.out.println("Já existe esse cliente!");
-                return;
+                return false;
             }
 
             try (PreparedStatement inserir = conn.prepareStatement(inserirCliente)) {
@@ -31,6 +31,7 @@ public class AddCliente {
                 inserir.setDouble(3, cliente.getLimiteTotal());
                 inserir.setString(4, cliente.getCpfCnpj());
                 inserir.executeUpdate();
+                return true;
             }
 
         } catch (SQLException e) {

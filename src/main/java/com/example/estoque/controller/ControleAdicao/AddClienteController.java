@@ -24,8 +24,7 @@ public class AddClienteController implements Initializable {
     @FXML
     private Button confirmarButton;
 
-    private Cliente novoCliente = new Cliente();
-    private int codigoUltimo = 0;
+    private int codigoUltimo = 0; // Vai pegar do database
 
     private final AddCliente ADD_CLIENTE = new AddCliente();
 
@@ -34,8 +33,9 @@ public class AddClienteController implements Initializable {
 
         confirmarButton.setOnKeyPressed(keyEvent -> {
             if(keyEvent.getCode() == KeyCode.ENTER){
-                adicionarClienteFuncao();
-                fecharStage();
+                if(adicionarClienteFuncao()){
+                    fecharStage();
+                }
             }
         });
 
@@ -47,28 +47,29 @@ public class AddClienteController implements Initializable {
                 && !cpfCnpj.getText().isEmpty();
     }
 
-    public void adicionarClienteFuncao(){
+    public boolean adicionarClienteFuncao(){
+        Cliente novoCliente = new Cliente();
         if(checarSeNaoFoiPostoValor()){
             try{
-                novoCliente.setCodigo(codigoUltimo);
                 novoCliente.setNome(nome.getText());
                 novoCliente.setLimiteTotal(Double.parseDouble(limite.getText()));
                 novoCliente.setCpfCnpj(cpfCnpj.getText());
-            } catch (IllegalArgumentException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Valor inválido");
-                alert.setContentText("Valor posto inválido. Verifique e tente novamente.");
-                alert.showAndWait();
+                return ADD_CLIENTE.addCliente(novoCliente);
+            } catch (NumberFormatException e) {
+                mostrarErro("Valor inválido. Verifique e tente novamente.");
+                return false;
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Não posto valor");
-            alert.setContentText("Valor não colocado.");
-            alert.showAndWait();
+            mostrarErro("Valor não colocado.");
+            return false;
         }
+    }
 
-        //chamar add cliente
-
+    private void mostrarErro(String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 
     public void fecharStage(){
